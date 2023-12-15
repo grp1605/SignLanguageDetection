@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign Language</title>
+  <style>
+    body {
+      background-color: #f7f7f7;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
+      width: 90%;
+      /* margin: 30 70 40 130px; */
+      /* margin: 20 40 40 100px; */
+      margin: 20 auto 80px;
+      margin-left:40px;
+      padding: 20px;
+      text-align: center;
+      background-image: url('/static/peace.jpg');
+      background-size:auto;
+      
+      
+    }
+    .container1 {
+      width: 90%;
+      margin: 20 auto 80px;
+      margin-left:40px;
+      padding: 20px;
+      text-align: center;
+      background-image: url('/static/peace.jpg');
+      background-size:auto;
+      filter: blur(0px);
+      
+      
+    }
+    
+    .heading {
+      font-size: 36px;
+      color:white;
+      margin-bottom: 20px;
+      
+    }
+    
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 25px;
+      color: white;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      margin-top: 250px;
+      margin-left:200px;
+      margin-right:250px;
+      
+      
+    }
+    
+    .button:hover {
+      background-color: #555;
+    }
+    .about-section1 {
+     
+      padding: 50px;
+      margin-top: 10px;
+      /* background-image: url('/static/peace.jpg'); */
+      
+     
+      text-align: justify;
+      /* background-color: rgb(221, 211, 218); */
+    }
+    .about-section {
+     
+      padding: 50px;
+      /* background-color: aqua; */
+      margin-top: 50px;
+      /* background-image: url('/static/peace.jpg'); */
+      text-align: justify;
+    }
+    
+    .about-section h2 {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    
+    .about-section p {
+      font-size: 18px;
+      color: #666;
+    }
+    /* .dropdown {
+      position: relative;
+      display: inline-block;
+      margin: 0px 30px auto 700px;
+      float: right;
+      
+
+    }
+    
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      z-index: 1;
+      background-color: #f9f9f9;
+      min-width: 100px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      top: -120px;
+      padding: 12px 16px;
+    }
+    
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    
+    .dropdown-content a {
+      color: #333;
+      display: block;
+      padding: 10px 0;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+    
+    .dropdown-content a:hover {
+      background-color: #ddd;
+    } */
+    .image-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 130px;
+      /* opacity: 0.9;
+      filter:brightness(3.0) */
+      
+    }
+    
+    .image-row img {
+      width: 250px;
+      height: 500px;
+      margin: 50px;
+      object-fit: cover;
+      border-radius: 5px;
+     
+    }
+    
+    #popupImage {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 9999;
+      text-align: center;
+    }
+    
+    #popupImage img {
+      max-width: 90%;
+      max-height: 90%;
+      margin-top: 5%;
+    }
+    .textbox1 {
+      position: absolute;
+      top: 1300px;
+      left: 240px;
+      
+      color: #080808;
+      padding: 5px;
+      font-size: 50PX;
+      font-family:'Courier New';
+    }
+    .textbox2 {
+      position: absolute;
+      top: 1300px;
+      left: 590px;
+      color: #080808;
+      padding: 5px;
+      font-size: 50PX;
+      font-family:'Courier New';
+    }
+    .textbox3 {
+      position: absolute;
+      top: 1300px;
+      left: 940px;
+      font-size: 50PX;
+      color: #080808;
+      padding: 5px;
+      font-family:'Courier New';
+    }
+
+    #cameraButton,#stopButton {
+      padding: 10px 20px;
+      
+      color: rgb(7, 7, 7);
+      border: none;
+      cursor: pointer;
+    }
+
+    .popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  right: -500px;
+}
+
+/* The actual popup */
+.popup .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+  </style>
+
+
+
+
+<script>
+  function showPopupImage(imageSrc) {
+    var popupImage = document.getElementById("popupImage");
+    var popupImageImg = document.getElementById("popupImageImg");
+    popupImageImg.src = imageSrc;
+    popupImage.style.display = "block";
+  }
+  
+  function hidePopupImage() {
+    var popupImage = document.getElementById("popupImage");
+    popupImage.style.display = "none";
+  }
+</script>
+
+
+
+
+</head>
+<body>
+    <div class="about-section1">
+      <div class="container1">
+    <h1 class="heading">Sign Language Website</h1>
+    <form action="/run_python" method="POST">
+        <button id="cameraButton" class="button">---- GET STARTED ----</button>
+        <!-- <a href="#" id="cameraButton" class="button">---- Get Started ----</a> -->
+    </form>
+    
+    
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+    
+    <!-- <div class="dropdown"> -->
+      <!-- <span>know more </span> -->
+      <!-- <div class="dropdown-content"> -->
+        <div class="popup" onclick="myFunction()">Click me to know more about us!
+               <span class="popuptext" id="myPopup">In the deaf community, sign language makes communication much more effortless. Sign language 
+                is a kind of communication that expresses one’s feelings through visual sign patterns. There is a 
+                communication gap when a deaf group wishes to share their thoughts, speech, and hearing with 
+                regular individuals. Two communities currently rely on human-based translators, which can be 
+                costly and inconvenient. So to overcome this problem we have come up with sign language 
+                Recognition System presents us with a novel, natural, and user-friendly method of communicating 
+                with computers more familiar to humans.</span>
+        </div>
+        <!-- <a class="popup" onclick="myFunction()" href="#">About us</a>
+        <span class="popuptext" id="myPopup">A Simple Popup!</span> -->
+        <!-- <a href="#">Option 2</a> -->
+      <!-- </div> -->
+  </div>
+  
+  
+ 
+</div>
+  <div class="about-section">
+    <div class="container">
+        
+      <h2>More about Sign language </h2>
+      <p style="font-size:medium">Sign languages are distinct and a unique way of communication. It allows individuals to express and engage in conversations, share emotions that can be learnt by both hearing and deaf individuals. It offers a means of communication for the deaf community which facilitates understanding between people.</p>
+    <br>
+     
+    <div class="image-row" >
+      <img style=" filter: brightness(90%);"src="/static/bg.jpg" alt="How"  onclick="showPopupImage('/static/atoz.jpg')">
+      <div class="textbox1">HOW</div>
+
+      <img style=" filter: brightness(90%);"src="/static/bg.jpg." alt="Image"  onclick="showPopupImage('/static/1to9.jpg')">
+      <div class="textbox2">TO</div>
+      <img style=" filter: brightness(90%);" src="/static/bg.jpg" alt="Image"  onclick="showPopupImage('/static/greeting.jpg')">
+      <div class="textbox3">SIGN</div>
+      
+
+         <!-- <img src="bb.jpg" alt="Image 1">  -->
+        <!-- <img src="99.jpeg" alt="Image 2">
+        <img src="Ll.jpg" alt="Image 3">  -->
+        <!-- <img src="22.jpg" alt="Image 3">  -->
+       </div> 
+      <!-- <div class="image-row" >
+        <img src="ww.jpg" alt="Image 1">
+        <img src="11.png" alt="Image 2">
+        <img src="nn.jpg" alt="Image 3">
+        <img src="ff.jpg" alt="Image 3">
+      </div>   -->
+      <div id="popupImage" onclick="hidePopupImage()">
+        <img id="popupImageImg" src="" alt="Popup Image">
+      </div>
+    </div>
+    
+  </div>
+  
+  
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+  <script>
+// When the user clicks on div, open the popup
+function myFunction() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+</script>
+
+</body>
+</html>
